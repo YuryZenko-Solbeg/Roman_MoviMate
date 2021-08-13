@@ -19,6 +19,8 @@ class GenreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -30,9 +32,11 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as? GenreCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         let genreName = genreList[indexPath.row].name.lowercased()
         let image = UIImage(named: genreName) ?? UIImage(named: "default")!
         cell.setGenreCell(image: image, title: genreName)
@@ -50,6 +54,7 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
             case .success(let movieList):
                 
                 DispatchQueue.main.async {
+                    
                 self.pushMovieViewController(movieList)
                 }
                 
