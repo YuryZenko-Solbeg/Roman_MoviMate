@@ -14,7 +14,8 @@ protocol NetworkManager {
     
     func getListOfGenre(completionHandler: @escaping (Result<GenreList, Error>) -> Void)
     func getListOfMovie(id: Int, completionHandler: @escaping (Result<MovieList, Error>) -> Void)
-    func getMovieById(id: Int, completionHandler: @escaping (Result<Movie, Error>) -> Void)
+    func getMovieById(id: Int, completionHandler: @escaping (Result<MovieDescription, Error>) -> Void)
+    func getMoviePoster(path: String) -> Data
 }
 
 //extension NetworkManager {
@@ -36,7 +37,7 @@ protocol NetworkManager {
 //}
 
 class NetworkManagerImpl: NetworkManager {
-  
+   
     var urlComponents: URLComponents
     var fetcher: NetworkFetcher!
     
@@ -53,16 +54,26 @@ class NetworkManagerImpl: NetworkManager {
     }
     
     func getListOfMovie(id: Int, completionHandler: @escaping (Result<MovieList, Error>) -> Void) {
-        urlComponents = URLComponents(string: "\(NetworkUrl.getListOfGenre.rawValue)/\(String(id))")!
+        urlComponents = URLComponents(string: "\(NetworkUrl.getListOfMovieByGenreId.rawValue)/\(String(id))")!
         urlComponents.queryItems = [URLQueryItem(name: "api_key", value: "9dcb2fc7f9c7799a5d892a673fa4d40c"),
                                     URLQueryItem(name: "language", value: "en")]
         fetcher.send(url: urlComponents.url!, completionHandler: completionHandler)
     }
     
-    func getMovieById(id: Int, completionHandler: @escaping (Result<Movie, Error>) -> Void) {
-        urlComponents = URLComponents(string: "\(NetworkUrl.getMovieDescriptionByMovieId.rawValue)/\(String(id))")!
+    func getMovieById(id: Int, completionHandler: @escaping (Result<MovieDescription, Error>) -> Void) {
+        urlComponents = URLComponents(string: "\(NetworkUrl.getMovieDescriptionByMovieId.rawValue)\(String(id))")!
         urlComponents.queryItems = [URLQueryItem(name: "api_key", value: "9dcb2fc7f9c7799a5d892a673fa4d40c"),
                                     URLQueryItem(name: "language", value: "en")]
+        print(urlComponents.url!)
         fetcher.send(url: urlComponents.url!, completionHandler: completionHandler)
+    }
+    
+    func getMoviePoster(path: String) -> Data {
+        urlComponents = URLComponents(string: "\(NetworkUrl.getMoviePostImage.rawValue)w500/\(String(path))")!
+        
+        guard let data = try? Data(contentsOf: urlComponents.url!) else {
+            return Data()
+        }
+        return data
     }
 }
