@@ -7,18 +7,13 @@
 
 import UIKit
 
-class MovieViewController: UIViewController {
+class MovieViewController: BaseViewController {
 
     @IBOutlet weak var collectonView: UICollectionView!
     
     private let cache = NSCache<NSNumber, UIImage>()
     
     var movieList: [Movie] = []
-    
-    var networkManager: NetworkManager {
-        
-        return NetworkManagerImpl(fetcher: NetworkFetcherImpl(service: NetworkServiceImpl()))
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +37,14 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
                 
         movieCell.setMovieCell(title: movieList[indexPath.item].title, additional: movieList[indexPath.item].overview)
+        movieCell.ratingView.setStarsRating(rating: Int(movieList[indexPath.item].rating))
+        
         return movieCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width * 0.9, height: view.frame.width * 0.45)
+        return CGSize(width: view.frame.width * 0.9, height: view.frame.width * 0.34)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -74,6 +71,40 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 }
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        networkManager.getMovieById(id: movieList[indexPath.item].id, completionHandler: { (result) in
+            switch result {
+            case .success(let movie):
+                
+                DispatchQueue.main.async {
+                    
+                self.pushMovieViewController(movie)
+                }
+                
+            case .failure(let error):
+                self.pushAlertViewController()
+                print(error)
+            }
+        })
+       }
+}
+
+private extension MovieViewController {
+    
+    func pushMovieViewController(_ movie: MovieDescription) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let movieView = storyBoard.instantiateViewController(identifier: "showDescriptionOfMovie") as? MovieDescriptionViewController else {
+            return
+        }
+        
+        movieView.movie = movie
+        
+        navigationController?.pushViewController(movieView, animated: true)
     }
 }
 
