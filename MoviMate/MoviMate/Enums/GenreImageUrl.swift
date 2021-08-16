@@ -23,5 +23,4 @@ enum GenreImageUrl: String {
     case thriller = "thriller"
     case military = "military"
     case western = "western"
-    
 }
