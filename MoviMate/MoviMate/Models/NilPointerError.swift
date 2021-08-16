@@ -9,4 +9,5 @@ import Foundation
 
 enum NilPointerError: Error {
     case invalidRequest(message: String)
+    case internetNoValid(message: String)
 }
