@@ -27,8 +27,6 @@ class NetworkFetcherImpl: NetworkFetcher {
             case .success(let data):
                 
             let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
                 guard let resultObject = try? decoder.decode(R.self, from: data) else {
                     completionHandler(.failure(NilPointerError.invalidRequest(message: "There's parsing error!")))
                     
