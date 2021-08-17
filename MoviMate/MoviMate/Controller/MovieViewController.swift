@@ -9,7 +9,7 @@ import UIKit
 
 class MovieViewController: BaseViewController {
 
-    @IBOutlet weak var collectonView: UICollectionView!
+    @IBOutlet private weak var collectonView: UICollectionView!
     
     private let cache = NSCache<NSNumber, UIImage>()
     

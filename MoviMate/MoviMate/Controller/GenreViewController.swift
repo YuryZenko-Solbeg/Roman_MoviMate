@@ -9,7 +9,7 @@ import UIKit
 
 class GenreViewController: BaseViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     var genreList: [Genres] = []
     
     override func viewDidLoad() {

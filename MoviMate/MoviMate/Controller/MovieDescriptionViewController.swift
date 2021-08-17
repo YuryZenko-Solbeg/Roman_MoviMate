@@ -10,18 +10,17 @@ import UIKit
 class MovieDescriptionViewController: BaseViewController {
 
     var movie: MovieDescription!
-    @IBOutlet weak var firstView: UIView!
-    @IBOutlet weak var secondView: UIView!
-    @IBOutlet weak var ratingView: UIView!
-    @IBOutlet weak var titleMovie: UILabel!
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var status: UILabel!
-    @IBOutlet weak var budget: UILabel!
-    @IBOutlet weak var tagline: UILabel!
-//    @IBOutlet weak var rating: UIView!
-    @IBOutlet weak var rating: UILabel!
-    @IBOutlet weak var genreList: UILabel!
-    @IBOutlet weak var overview: UILabel!
+    @IBOutlet private weak var firstView: UIView!
+    @IBOutlet private weak var secondView: UIView!
+    @IBOutlet private weak var ratingView: UIView!
+    @IBOutlet private weak var titleMovie: UILabel!
+    @IBOutlet private weak var icon: UIImageView!
+    @IBOutlet private weak var status: UILabel!
+    @IBOutlet private weak var budget: UILabel!
+    @IBOutlet private weak var tagline: UILabel!
+    @IBOutlet private weak var rating: UILabel!
+    @IBOutlet private weak var genreList: UILabel!
+    @IBOutlet private weak var overview: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,7 +11,7 @@ class SettingsViewController: UIViewController {
     
     private var settingArray = ["LANGUAGE OPTION", "RESOLUSION OPTIONS"]
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
