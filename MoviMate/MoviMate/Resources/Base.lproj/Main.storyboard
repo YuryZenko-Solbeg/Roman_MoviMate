@@ -539,7 +539,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="D6A-mp-X0n" firstAttribute="bottom" secondItem="Met-iA-hMX" secondAttribute="bottomMargin" id="Tfl-nZ-FVW"/>
                                             <constraint firstItem="tiO-ha-ltz" firstAttribute="top" secondItem="Met-iA-hMX" secondAttribute="top" id="cgE-0M-c1p"/>
@@ -574,10 +574,13 @@
                     </view>
                     <connections>
                         <outlet property="budget" destination="bEb-Wi-ymr" id="6Ur-DV-F3E"/>
+                        <outlet property="firstView" destination="tiO-ha-ltz" id="BbP-2h-FiR"/>
                         <outlet property="genreList" destination="iWu-ZD-h5p" id="8MY-RO-vn4"/>
                         <outlet property="icon" destination="D4t-H2-OID" id="S9j-Rp-1bb"/>
                         <outlet property="overview" destination="p8z-Pa-qwF" id="fKu-nb-CGP"/>
                         <outlet property="rating" destination="KaM-NJ-3b7" id="44K-Wk-yv1"/>
+                        <outlet property="ratingView" destination="A7g-XK-ILX" id="0oT-Jg-qox"/>
+                        <outlet property="secondView" destination="D6A-mp-X0n" id="c4O-Gz-7OI"/>
                         <outlet property="status" destination="Hi6-hE-sYj" id="dS4-sC-c4I"/>
                         <outlet property="tagline" destination="Z3T-el-b55" id="yR8-XR-lGO"/>
                         <outlet property="titleMovie" destination="EdN-13-JNw" id="pq6-X0-HWI"/>
