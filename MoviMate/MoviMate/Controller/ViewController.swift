@@ -7,14 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BaseViewController {
 
     @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var settingsButton: UIButton!
-    
-    var networkManager: NetworkManager {
-        return NetworkManagerImpl(fetcher: NetworkFetcherImpl(service: NetworkServiceImpl()))
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +36,7 @@ class ViewController: UIViewController {
                 case .success(let genreList):
                     self.openGenreViewController(genreList)
                 case .failure(let error):
+                    self.pushAlertViewController()
                     print(error)
                 }
             }

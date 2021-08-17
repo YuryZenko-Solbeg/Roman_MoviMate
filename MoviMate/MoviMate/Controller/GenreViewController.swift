@@ -7,14 +7,10 @@
 
 import UIKit
 
-class GenreViewController: UIViewController {
+class GenreViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var genreList: [Genres] = []
-    
-    var networkManager: NetworkManager {
-        return NetworkManagerImpl(fetcher: NetworkFetcherImpl(service: NetworkServiceImpl()))
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,19 +45,20 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let genreId = genreList[indexPath.row].id
         networkManager.getListOfMovie(id: genreId, completionHandler: { (result) in
 
-           
+            DispatchQueue.main.async {
             switch result {
             case .success(let movieList):
                 
-                DispatchQueue.main.async {
-                    
+                
                 self.pushMovieViewController(movieList)
-                }
+                
                 
             case .failure(let error):
-                
+                self.pushAlertViewController()
                 print(error)
             }
+        }
+            
         })
     }
     
@@ -83,4 +80,5 @@ private extension GenreViewController {
         
         navigationController?.pushViewController(movieView, animated: true)
     }
+
 }
