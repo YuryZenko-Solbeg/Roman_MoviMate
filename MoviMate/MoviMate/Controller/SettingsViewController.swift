@@ -9,7 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    var settingArray = ["LANGUAGE OPTION", "RESOLUSION OPTIONS"]
+    private var settingArray = ["LANGUAGE OPTION", "RESOLUSION OPTIONS"]
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -18,16 +18,19 @@ class SettingsViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-//        collectionView.register(UINib(nibName: "flagView", bundle: nil), forCellWithReuseIdentifier: "flagsView")
-//        collectionView.register(UINib(nibName: "segmentView", bundle: nil), forCellWithReuseIdentifier: "segmentsView")
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        
     }
+    
+        @objc func tapHandler(_ gestureRecognizer: UIGestureRecognizer? = nil) {
+            print(gestureRecognizer)
+        }
+    
+        @objc func swipeHandler(_ gestureRecognizer: UIGestureRecognizer? = nil) {
+            print(gestureRecognizer)
+        }
 }
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -40,15 +43,32 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "languageOption", for: indexPath) as? LanguageOptionCollectionViewCell else {
+            
             return UICollectionViewCell()
         }
+        cell.title.text = settingArray[indexPath.item]
         
         cell.layer.cornerRadius = 8
         
         if indexPath.item == 0 {
-            cell.addCellSubview(cellState: .lan)
+            cell.addCellSubview(cellState: .lan, completionHandler: { viewArray in
+                            for view in viewArray {
+                                let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapHandler(_:)))
+                                view.addGestureRecognizer(tap)
+                            }
+                
+            })
         } else if indexPath.item == 1 {
-            cell.addCellSubview(cellState: .segment)
+            cell.addCellSubview(cellState: .segment, completionHandler: { viewArray in
+                for view in viewArray {
+                
+                                guard let segment = view as? SegmentControlView else {
+                                    return
+                                }
+                
+                                segment.segmentView.addTarget(self, action: #selector(self.swipeHandler(_:)), for: .valueChanged)
+                            }
+            })
         } else {
             fatalError("Didn't determine changing")
         }
