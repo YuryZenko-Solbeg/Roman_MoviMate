@@ -17,6 +17,8 @@ class NetworkServiceImpl: NetworkService {
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if let data = data {
                 complitionHandler(.success(data))
+            } else {
+                complitionHandler(.failure(NilPointerError.internetNoValid(message: "Please, check connection to internet")))
             }
             
             if let error = error {
