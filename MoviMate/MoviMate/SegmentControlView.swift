@@ -14,6 +14,10 @@ class SegmentControlView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.backgroundColor = .black
+        segmentView.layer.borderWidth = 0.4
+        segmentView.layer.borderColor = UIColor.yellow.cgColor
+        
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.yellow]
         segmentView.setTitleTextAttributes(titleTextAttributes, for: .normal)
         segmentView.setTitleTextAttributes(titleTextAttributes, for: .selected)
