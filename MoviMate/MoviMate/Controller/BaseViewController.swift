@@ -10,9 +10,11 @@ import UIKit
 class BaseViewController: UIViewController {
 
     private(set) var networkManager: NetworkManager = NetworkManagerImpl(fetcher: NetworkFetcherImpl(service: NetworkServiceImpl()))
-    
+//    private(set) var userManager: UserDefaultManager = UserDefaultManager()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        UserDefaultManager.shared.getLanguage()
     }
     
     func pushAlertViewController() {
