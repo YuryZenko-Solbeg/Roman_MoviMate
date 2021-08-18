@@ -13,24 +13,16 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     
+//    var actionIndex: IndexPath?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
-        @objc func tapHandler(_ gestureRecognizer: UIGestureRecognizer? = nil) {
-            print(gestureRecognizer)
-        }
-    
-        @objc func swipeHandler(_ gestureRecognizer: UIGestureRecognizer? = nil) {
-            print(gestureRecognizer)
-        }
 }
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -46,30 +38,21 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
             
             return UICollectionViewCell()
         }
+        
         cell.title.text = settingArray[indexPath.item]
+        
+//        actionIndex = indexPath
         
         cell.layer.cornerRadius = 8
         
         if indexPath.item == 0 {
-            cell.addCellSubview(cellState: .lan, completionHandler: { viewArray in
-                            for view in viewArray {
-                                let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapHandler(_:)))
-                                view.addGestureRecognizer(tap)
-                            }
-                
-            })
+            
+            cell.addCellSubview(cellState: .lan)
         } else if indexPath.item == 1 {
-            cell.addCellSubview(cellState: .segment, completionHandler: { viewArray in
-                for view in viewArray {
-                
-                                guard let segment = view as? SegmentControlView else {
-                                    return
-                                }
-                
-                                segment.segmentView.addTarget(self, action: #selector(self.swipeHandler(_:)), for: .valueChanged)
-                            }
-            })
+            
+            cell.addCellSubview(cellState: .segment)
         } else {
+            
             fatalError("Didn't determine changing")
         }
         
