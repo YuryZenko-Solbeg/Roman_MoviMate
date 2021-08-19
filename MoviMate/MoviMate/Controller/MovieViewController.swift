@@ -18,6 +18,9 @@ class MovieViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let titleLabel = navigationItem.titleView as? UILabel
+        titleLabel?.text = "Movies"
+        
         collectonView.delegate = self
         collectonView.dataSource = self
     }

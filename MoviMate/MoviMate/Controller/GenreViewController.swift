@@ -21,6 +21,9 @@ class GenreViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let titleLabel = navigationItem.titleView as? UILabel
+        titleLabel?.text = "Select genre"
+        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -53,9 +56,7 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
             switch result {
             case .success(let movieList):
                 
-                
                 self.pushMovieViewController(movieList)
-                
                 
             case .failure(let error):
                 self.pushAlertViewController()

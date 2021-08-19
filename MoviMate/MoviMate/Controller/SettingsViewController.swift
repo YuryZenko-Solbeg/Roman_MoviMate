@@ -7,18 +7,23 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: BaseViewController {
     
     private var settingArray = ["LANGUAGE OPTION", "RESOLUSION OPTIONS"]
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    
-//    var actionIndex: IndexPath?
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
+            
+        let titleLabel = navigationItem.titleView as? UILabel
+        titleLabel?.text = "Settings"
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -40,9 +45,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         cell.title.text = settingArray[indexPath.item]
-        
-//        actionIndex = indexPath
-        
+                
         cell.layer.cornerRadius = 8
         
         if indexPath.item == 0 {

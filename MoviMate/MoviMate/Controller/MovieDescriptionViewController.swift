@@ -27,6 +27,9 @@ class MovieDescriptionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let titleLabel = navigationItem.titleView as? UILabel
+        titleLabel?.text = "Movies"
+        
         scrollView.contentSize = CGSize(width: firstView.frame.width, height: firstView.frame.height + secondView.frame.height + 20)
         
         firstView.layer.cornerRadius = 8
