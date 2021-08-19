@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.backgroundColor = .black
 //        UserDefaultManager.shared.getLanguage()
     }
     

@@ -12,12 +12,17 @@ class ViewController: BaseViewController {
     @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var settingsButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startButton.layer.cornerRadius = 8
         settingsButton.layer.cornerRadius = 8
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
 //        let mutabletitle = NSMutableAttributedString(string: "START")
 
         let attributedTitle = NSAttributedString(string: "START GAME", attributes:
