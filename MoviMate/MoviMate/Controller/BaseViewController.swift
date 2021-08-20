@@ -14,21 +14,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arrow")
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arrow")
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        backItem.tintColor = .white
-        self.navigationItem.backBarButtonItem = backItem
-        
-        let lbNavTitle = UILabel (frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.6, height: 40))
-        lbNavTitle.textColor = UIColor.white
-        lbNavTitle.font = UIFont.boldSystemFont(ofSize: 20)
-        lbNavTitle.textAlignment = .left
-        lbNavTitle.text = "Home"
-        
-        self.navigationItem.titleView = lbNavTitle
+        setBackIndicator()
+        setDefaultBackBarButton()
+        setTitleView()
     }
     
     func pushAlertViewController() {
@@ -40,5 +28,30 @@ class BaseViewController: UIViewController {
         }
         
         navigationController?.pushViewController(movieView, animated: true)
+    }
+}
+
+private extension BaseViewController {
+    
+    func setBackIndicator() {
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arrow")
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arrow")
+    }
+    
+    func setDefaultBackBarButton() {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backItem
+    }
+    
+    func setTitleView() {
+        let lbNavTitle = UILabel (frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.6, height: 40))
+        lbNavTitle.textColor = UIColor.white
+        lbNavTitle.font = UIFont.boldSystemFont(ofSize: 20)
+        lbNavTitle.textAlignment = .left
+        lbNavTitle.text = "Home"
+        
+        self.navigationItem.titleView = lbNavTitle
     }
 }
