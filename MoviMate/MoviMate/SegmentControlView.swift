@@ -20,15 +20,11 @@ class SegmentControlView: UIView {
         func getSize() -> Int {
             
             switch self {
-
             case .small:
-
                 return 200
             case .meddium:
-
                 return 300
             case .high:
-
              return 500
             }
         }
@@ -36,7 +32,6 @@ class SegmentControlView: UIView {
         func getElement(size: Int) -> PixelSize {
             
             switch size {
-            
             case 200:
                 return .small
             case 300:
