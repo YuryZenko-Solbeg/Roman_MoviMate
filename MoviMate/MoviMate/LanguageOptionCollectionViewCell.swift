@@ -23,7 +23,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        stackView.spacing = 5
+        stackView.spacing = 10
         stackView.layer.cornerRadius = 8
     }
     
@@ -38,7 +38,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             }
             
             englishView.flagIcon.image = UIImage(named: "free-icon-united-states-197484")!
-            englishView.name.text = "English"
+            englishView.name.text = "ENGLISH"
             
             var lan = "radio_off"
             if UserDefaultManager.shared.getLanguage() == "en" {
@@ -55,7 +55,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             }
             
             russianView.flagIcon.image = UIImage(named: "free-icon-russia-197408")!
-            russianView.name.text = "Russian"
+            russianView.name.text = "RUSSIAN"
             
             lan = "radio_off"
             if UserDefaultManager.shared.getLanguage() == "ru" {
@@ -70,7 +70,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             stackView.alignment = .center
             
             stackView.isLayoutMarginsRelativeArrangement = true
-            stackView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+            stackView.layoutMargins = .init(top: 15, left: 10, bottom: 15, right: 10)
                 
             stackView.addArrangedSubview(englishView)
             stackView.addArrangedSubview(russianView)
@@ -95,9 +95,9 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             segmentView.segmentView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                segmentView.segmentView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4),
+                segmentView.segmentView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.33),
                 segmentView.segmentView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-                segmentView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.95)
+                segmentView.segmentView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.95)
             ])
         }
     }
@@ -117,7 +117,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
         }
         
         var lan = ""
-        if language == "English" {
+        if language == "ENGLISH" {
             lan = "en"
         } else {
             lan = "ru"
