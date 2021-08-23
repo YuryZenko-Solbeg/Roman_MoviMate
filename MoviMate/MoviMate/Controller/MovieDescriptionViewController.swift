@@ -34,9 +34,25 @@ class MovieDescriptionViewController: BaseViewController {
         
         firstView.layer.cornerRadius = 8
         secondView.layer.cornerRadius = 8
-        status.layer.cornerRadius = 8
-        budget.layer.cornerRadius = 8
-        tagline.layer.cornerRadius = 8
+        
+        
+//        icon.layer.masksToBounds = false
+//        
+//        icon.layer.shadowColor = UIColor.white.cgColor
+//        icon.layer.shadowOpacity = 1
+//        icon.layer.shadowOffset = CGSize(width: 5, height: 5)
+//        icon.layer.shadowRadius = 6
+//        icon.layer.shadowPath = UIBezierPath(rect: icon.bounds).cgPath
+//        icon.layer.shouldRasterize = true
+//        icon.layer.rasterizationScale = UIScreen.main.scale
+//        
+//        
+
+        budget.layer.masksToBounds = true
+        budget.layer.cornerRadius = 4
+        
+        tagline.layer.masksToBounds = true
+        tagline.layer.cornerRadius = 4
 
         ratingView.layer.cornerRadius = ratingView.frame.width / 2
 
@@ -53,8 +69,9 @@ class MovieDescriptionViewController: BaseViewController {
         
         var buff: String = ""
         for genre in movie.genreType {
-            buff += genre.name + ","
+            buff += genre.name + ", "
         }
+        
         genreList.text = buff
         overview.text = movie.overview
     }
