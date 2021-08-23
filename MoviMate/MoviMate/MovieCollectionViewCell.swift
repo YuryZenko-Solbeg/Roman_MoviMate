@@ -19,6 +19,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 8
         icon.layer.cornerRadius = 8
+        
+        icon.layer.shadowColor = UIColor.black.cgColor
+        icon.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        icon.layer.shadowOpacity = 0.8
+        icon.layer.shadowRadius = 2
+        icon.layer.masksToBounds = false
+        icon.layer.cornerRadius = 4.0
     }
     
     func setMovieCell(image: UIImage, title: String, additional: String) {
