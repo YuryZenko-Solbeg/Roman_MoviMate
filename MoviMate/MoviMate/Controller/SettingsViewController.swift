@@ -64,6 +64,6 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width * 0.87, height: view.frame.width * 0.54)
+        return CGSize(width: view.frame.width * 0.87, height: view.frame.width * 0.5)
     }
 }
