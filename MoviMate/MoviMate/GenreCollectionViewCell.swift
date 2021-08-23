@@ -12,11 +12,12 @@ class GenreCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     func setGenreCell(image: UIImage, title: String) {
+
         icon.image = image
         self.title.text = title
     }

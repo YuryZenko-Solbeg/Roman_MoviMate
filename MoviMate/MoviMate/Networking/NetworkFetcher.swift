@@ -8,6 +8,7 @@
 import Foundation
 
 protocol NetworkFetcher {
+    
     func send<R: Codable>(url: URL, completionHandler: @escaping (Result<R, Error>) -> Void)
 }
 
@@ -24,14 +25,16 @@ class NetworkFetcherImpl: NetworkFetcher {
         service.send(url: url) { (requestValue) in
 
             switch requestValue {
+            
             case .success(let data):
                 
             let decoder = JSONDecoder()
-                guard let resultObject = try? decoder.decode(R.self, from: data) else {
-                    completionHandler(.failure(NilPointerError.invalidRequest(message: "There's parsing error!")))
+                
+            guard let resultObject = try? decoder.decode(R.self, from: data) else {
+                completionHandler(.failure(NilPointerError.invalidRequest(message: "There's parsing error!")))
                     
                     return
-                }
+            }
                 
                 completionHandler(.success(resultObject))
             case .failure(let error):

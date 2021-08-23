@@ -10,6 +10,7 @@ import UIKit
 class GenreViewController: BaseViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    
     var genreList: [Genres] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,22 +27,26 @@ class GenreViewController: BaseViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
     }
 }
 
 extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return genreList.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as? GenreCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreViewController.genreReuseIdentifier, for: indexPath) as? GenreCollectionViewCell else {
+            
             return UICollectionViewCell()
         }
         
         let genreName = genreList[indexPath.row].name.lowercased()
-        let image = UIImage(named: genreName) ?? UIImage(named: "default")!
+        let image = UIImage(named: genreName) ?? UIImage(named: GenreViewController.defaultIcon)!
         cell.setGenreCell(image: image, title: genreName)
        
         return cell
@@ -54,11 +59,13 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
 
             DispatchQueue.main.async {
             switch result {
+            
             case .success(let movieList):
                 
                 self.pushMovieViewController(movieList)
                 
             case .failure(let error):
+                
                 self.pushAlertViewController()
                 print(error)
             }
@@ -76,8 +83,9 @@ private extension GenreViewController {
     
     func pushMovieViewController(_ list: MovieList) {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        guard let movieView = storyBoard.instantiateViewController(identifier: "showListOfMovies") as? MovieViewController else {
+        let storyBoard = UIStoryboard(name: GenreViewController.uIStoryboardIdentifie, bundle: nil)
+        guard let movieView = storyBoard.instantiateViewController(identifier: GenreViewController.movieViewControllerIdentifie) as? MovieViewController else {
+            
             return
         }
         
@@ -85,5 +93,4 @@ private extension GenreViewController {
         
         navigationController?.pushViewController(movieView, animated: true)
     }
-
 }

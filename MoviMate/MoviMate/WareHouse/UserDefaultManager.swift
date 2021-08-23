@@ -8,7 +8,9 @@
 import UIKit
 
 protocol WareHouseManager {
+    
     func updateStorage(_ dictionary: [String: Any])
+    
     func getValueFromStorage(key: String) -> Any?
 }
 
@@ -18,7 +20,8 @@ final class UserDefaultManager: WareHouseManager {
 
     private let storage = UserDefaults.standard
     
-    private static let defaultSystemLanguge = "en"
+    static let defaultSystemLanguge = "en"
+    static let systemRussianLanguge = "ru"
     private static let defaultPixelSize = 200
 
     private var language: String?
@@ -34,7 +37,6 @@ final class UserDefaultManager: WareHouseManager {
             updateStorage([WareHouseType.language.rawValue:UserDefaultManager.defaultSystemLanguge, WareHouseType.pixelSize.rawValue:UserDefaultManager.defaultPixelSize])
             return
         }
-//        updateStorage(["lan": "en"])
         language = getValueFromStorage(key: WareHouseType.language.rawValue) as? String
         pixelSize = getValueFromStorage(key: WareHouseType.pixelSize.rawValue) as? Int
     }
@@ -48,7 +50,6 @@ final class UserDefaultManager: WareHouseManager {
             if key == WareHouseType.language.rawValue {
                 
                 language = value as? String
-//                setLanguageByProxy(language: value as? String)
             } else if key == WareHouseType.pixelSize.rawValue {
                 
                 pixelSize = value as? Int

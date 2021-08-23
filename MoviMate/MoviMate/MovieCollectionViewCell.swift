@@ -14,32 +14,43 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var additional: UILabel!
     @IBOutlet weak var ratingView: RatingView!
     
+    private static let cornerRadiusValue: CGFloat = 8
+    private static let shadowWidth: CGFloat = 0.0
+    private static let shadowHeight: CGFloat = 2.0
+    private static let shadowOpacity: Float = 0.8
+    private static let shadowRadius: CGFloat = 2
+    private static let shadowCornerRadius: CGFloat = 4.0
+    private static let iconViewMasksToBounds = false
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = 8
-        icon.layer.cornerRadius = 8
+        self.layer.cornerRadius = MovieCollectionViewCell.cornerRadiusValue
+        icon.layer.cornerRadius = MovieCollectionViewCell.cornerRadiusValue
         
         icon.layer.shadowColor = UIColor.black.cgColor
-        icon.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        icon.layer.shadowOpacity = 0.8
-        icon.layer.shadowRadius = 2
-        icon.layer.masksToBounds = false
-        icon.layer.cornerRadius = 4.0
+        icon.layer.shadowOffset = CGSize(width: MovieCollectionViewCell.shadowWidth, height: MovieCollectionViewCell.shadowHeight)
+        icon.layer.shadowOpacity = MovieCollectionViewCell.shadowOpacity
+        icon.layer.shadowRadius = MovieCollectionViewCell.shadowRadius
+        icon.layer.masksToBounds = MovieCollectionViewCell.iconViewMasksToBounds
+        icon.layer.cornerRadius = MovieCollectionViewCell.shadowCornerRadius
     }
     
     func setMovieCell(image: UIImage, title: String, additional: String) {
+        
         icon.image = image
         self.title.text = title
         self.additional.text = additional
     }
     
     func setMovieCell(title: String, additional: String) {
+        
         self.title.text = title
         self.additional.text = additional
     }
     
     func setImage(image: UIImage) {
+        
         icon.image = image
     }
 }

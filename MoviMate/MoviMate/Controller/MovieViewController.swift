@@ -34,7 +34,7 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as? MovieCollectionViewCell else {
+        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieViewController.moiveReuseIdentifier, for: indexPath) as? MovieCollectionViewCell else {
             
             return UICollectionViewCell()
         }
@@ -80,6 +80,7 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         networkManager.getMovieById(id: movieList[indexPath.item].id, completionHandler: { (result) in
             switch result {
+            
             case .success(let movie):
                 
                 DispatchQueue.main.async {
@@ -99,9 +100,10 @@ private extension MovieViewController {
     
     func pushMovieViewController(_ movie: MovieDescription) {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard(name: MovieViewController.uIStoryboardIdentifie, bundle: nil)
         
-        guard let movieView = storyBoard.instantiateViewController(identifier: "showDescriptionOfMovie") as? MovieDescriptionViewController else {
+        guard let movieView = storyBoard.instantiateViewController(identifier: MovieViewController.movieDescriptionViewControllerIdentifie) as? MovieDescriptionViewController else {
+            
             return
         }
         

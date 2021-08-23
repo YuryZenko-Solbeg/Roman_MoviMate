@@ -14,6 +14,28 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
+    private static let stackViewSpace: CGFloat = 10
+    private static let stackViewCornerRadius: CGFloat = 8
+    private static let languageViewIdentifie = "LanguageView"
+    private static let languageViewFlagIconEnglish = "free-icon-united-states-197484"
+    private static let languageViewFlagIconRussian = "free-icon-russia-197408"
+    private static let languageViewEnglishName = "ENGLISH"
+    private static let languageViewRussianName = "RUSSIAN"
+    private static let segmentControlViewIdentifie = "SegmentControlView"
+    private static let flagStateRadioButtonOff = "radio_off"
+    private static let flagStateRadioButtonOn = "radio_on"
+    private static let languageBorderWidth: CGFloat = 0.4
+    private static let languageBorderColor = UIColor.yellow.cgColor
+    private static let languageCornerRadius: CGFloat = 8
+    private static let stackViewMarginTop: CGFloat = 15
+    private static let stackViewMarginLeft: CGFloat = 10
+    private static let stackViewMarginBottom: CGFloat = 15
+    private static let stackViewMarginRight: CGFloat = 10
+    private static let stackViewHeightAnchor: CGFloat = 0.33
+    private static let stackViewWidthAnchor: CGFloat = 0.95
+
+
+
     enum SettingCellState {
         case lan, segment
     }
@@ -23,8 +45,8 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        stackView.spacing = 10
-        stackView.layer.cornerRadius = 8
+        stackView.spacing = LanguageOptionCollectionViewCell.stackViewSpace
+        stackView.layer.cornerRadius = LanguageOptionCollectionViewCell.stackViewCornerRadius
     }
     
     func addCellSubview(cellState: SettingCellState) {
@@ -33,44 +55,50 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
         
         case .lan:
             
-            guard let englishView = Bundle.main.loadNibNamed("LanguageView", owner: self, options: nil)?[0] as? LanguageView else {
+            guard let englishView = Bundle.main.loadNibNamed(LanguageOptionCollectionViewCell.languageViewIdentifie, owner: self, options: nil)?[0] as? LanguageView else {
+                
                 return
             }
             
-            englishView.flagIcon.image = UIImage(named: "free-icon-united-states-197484")!
-            englishView.name.text = "ENGLISH"
+            englishView.flagIcon.image = UIImage(named: LanguageOptionCollectionViewCell.languageViewFlagIconEnglish)!
+            englishView.name.text = LanguageOptionCollectionViewCell.languageViewEnglishName
             
-            var lan = "radio_off"
-            if UserDefaultManager.shared.getLanguage() == "en" {
-                lan = "radio_on"
+            var lan = LanguageOptionCollectionViewCell.flagStateRadioButtonOff
+            
+            if UserDefaultManager.shared.getLanguage() == UserDefaultManager.defaultSystemLanguge {
+                
+                lan = LanguageOptionCollectionViewCell.flagStateRadioButtonOn
             }
             englishView.flagState.image = UIImage(named: lan)!
             
-            englishView.layer.borderWidth = 0.4
-            englishView.layer.borderColor = UIColor.yellow.cgColor
-            englishView.layer.cornerRadius = 8
+            englishView.layer.borderWidth = LanguageOptionCollectionViewCell.languageBorderWidth
+            englishView.layer.borderColor = LanguageOptionCollectionViewCell.languageBorderColor
+            englishView.layer.cornerRadius = LanguageOptionCollectionViewCell.languageCornerRadius
 
-            guard let russianView = Bundle.main.loadNibNamed("LanguageView", owner: self, options: nil)?[0] as? LanguageView else {
+            guard let russianView = Bundle.main.loadNibNamed(LanguageOptionCollectionViewCell.languageViewIdentifie, owner: self, options: nil)?[0] as? LanguageView else {
+                
                 return
             }
             
-            russianView.flagIcon.image = UIImage(named: "free-icon-russia-197408")!
-            russianView.name.text = "RUSSIAN"
+            russianView.flagIcon.image = UIImage(named: LanguageOptionCollectionViewCell.languageViewFlagIconRussian)!
+            russianView.name.text = LanguageOptionCollectionViewCell.languageViewRussianName
             
-            lan = "radio_off"
-            if UserDefaultManager.shared.getLanguage() == "ru" {
-                lan = "radio_on"
+            lan = LanguageOptionCollectionViewCell.flagStateRadioButtonOff
+            
+            if UserDefaultManager.shared.getLanguage() == UserDefaultManager.systemRussianLanguge {
+                
+                lan = LanguageOptionCollectionViewCell.flagStateRadioButtonOn
             }
             russianView.flagState.image = UIImage(named: lan)!
             
-            russianView.layer.borderWidth = 0.4
-            russianView.layer.borderColor = UIColor.yellow.cgColor
-            russianView.layer.cornerRadius = 8
+            russianView.layer.borderWidth = LanguageOptionCollectionViewCell.languageBorderWidth
+            russianView.layer.borderColor = LanguageOptionCollectionViewCell.languageBorderColor
+            russianView.layer.cornerRadius = LanguageOptionCollectionViewCell.languageCornerRadius
             
             stackView.alignment = .center
             
             stackView.isLayoutMarginsRelativeArrangement = true
-            stackView.layoutMargins = .init(top: 15, left: 10, bottom: 15, right: 10)
+            stackView.layoutMargins = .init(top: LanguageOptionCollectionViewCell.stackViewMarginTop, left: LanguageOptionCollectionViewCell.stackViewMarginLeft, bottom: LanguageOptionCollectionViewCell.stackViewMarginBottom, right: LanguageOptionCollectionViewCell.stackViewMarginRight)
                 
             stackView.addArrangedSubview(englishView)
             stackView.addArrangedSubview(russianView)
@@ -78,11 +106,13 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             for view in stackView.subviews {
                 
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapHandler(_:)))
+                
                 view.addGestureRecognizer(tap)
             }
         case .segment:
             
-            guard let segmentView = Bundle.main.loadNibNamed("SegmentControlView", owner: self, options: nil)?[0] as? SegmentControlView else {
+            guard let segmentView = Bundle.main.loadNibNamed(LanguageOptionCollectionViewCell.segmentControlViewIdentifie, owner: self, options: nil)?[0] as? SegmentControlView else {
+                
                 return
             }
             
@@ -95,9 +125,10 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
             segmentView.segmentView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                segmentView.segmentView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.33),
+                
+                segmentView.segmentView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: LanguageOptionCollectionViewCell.stackViewHeightAnchor),
                 segmentView.segmentView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-                segmentView.segmentView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.95)
+                segmentView.segmentView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: LanguageOptionCollectionViewCell.stackViewWidthAnchor)
             ])
         }
     }
@@ -105,22 +136,27 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
     func reloadLanguageView(language: String) {
         
         guard let languageArray = stackView.arrangedSubviews as? [LanguageView] else {
+            
             return
         }
         
         for view in languageArray {
             if view.name.text == language {
-                view.flagState.image = UIImage(named: "radio_on")!
+                
+                view.flagState.image = UIImage(named: LanguageOptionCollectionViewCell.flagStateRadioButtonOn)!
             } else {
-                view.flagState.image = UIImage(named: "radio_off")!
+                
+                view.flagState.image = UIImage(named: LanguageOptionCollectionViewCell.flagStateRadioButtonOff)!
             }
         }
         
         var lan = ""
-        if language == "ENGLISH" {
-            lan = "en"
+        if language == LanguageOptionCollectionViewCell.languageViewEnglishName {
+            
+            lan = UserDefaultManager.defaultSystemLanguge
         } else {
-            lan = "ru"
+            
+            lan = UserDefaultManager.systemRussianLanguge
         }
         
         UserDefaultManager.shared.updateStorage([UserDefaultManager.WareHouseType.language.rawValue:lan])
@@ -129,6 +165,7 @@ class LanguageOptionCollectionViewCell: UICollectionViewCell {
     @objc func tapHandler(_ gestureRecognizer: UIGestureRecognizer? = nil) {
         
         guard let lan = gestureRecognizer?.view as? LanguageView else {
+            
             return
         }
 

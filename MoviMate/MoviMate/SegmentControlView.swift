@@ -11,6 +11,15 @@ class SegmentControlView: UIView {
     
     @IBOutlet weak var segmentView: UISegmentedControl!
     
+    private static let pixelSizeLowValue = 200
+    private static let pixelSizeMeddiumValue = 300
+    private static let pixelSizeHighValue = 500
+    
+    private static let pixelSizeLowName = "LOW"
+    private static let pixelSizeMeddiumName = "MEDDIUM"
+    private static let pixelSizeHighName = "HIGH"
+
+    
     enum PixelSize: Int {
         
         case small = 0
@@ -21,22 +30,25 @@ class SegmentControlView: UIView {
             
             switch self {
             case .small:
-                return 200
+                
+                return pixelSizeLowValue
             case .meddium:
-                return 300
+                
+                return pixelSizeMeddiumValue
             case .high:
-             return 500
+                
+             return pixelSizeHighValue
             }
         }
         
         func getElement(size: Int) -> PixelSize {
             
             switch size {
-            case 200:
+            case pixelSizeLowValue:
                 return .small
-            case 300:
+            case pixelSizeMeddiumValue:
                 return .meddium
-            case 500:
+            case pixelSizeHighValue:
                 return .high
             default:
                 fatalError("Incorrect size in PixelSize enum")
@@ -56,9 +68,9 @@ class SegmentControlView: UIView {
         segmentView.setTitleTextAttributes(titleTextAttributes, for: .selected)
         
         segmentView.removeAllSegments()
-        segmentView.insertSegment(withTitle: "LOW", at: 0, animated: false)
-        segmentView.insertSegment(withTitle: "MEDDIUM", at: 1, animated: false)
-        segmentView.insertSegment(withTitle: "HIGH", at: 2, animated: false)
+        segmentView.insertSegment(withTitle: SegmentControlView.pixelSizeLowName, at: 0, animated: false)
+        segmentView.insertSegment(withTitle: SegmentControlView.pixelSizeMeddiumName, at: 1, animated: false)
+        segmentView.insertSegment(withTitle: SegmentControlView.pixelSizeHighName, at: 2, animated: false)
         
 
         let size = UserDefaultManager.shared.getPixelSize()
@@ -77,6 +89,7 @@ class SegmentControlView: UIView {
     }
     
     func reloadSegment(size: Int) {
+        
         UserDefaultManager.shared.updateStorage([UserDefaultManager.WareHouseType.pixelSize.rawValue:size])
     }
 }

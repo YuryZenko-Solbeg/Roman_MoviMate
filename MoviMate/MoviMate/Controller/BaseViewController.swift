@@ -11,6 +11,15 @@ class BaseViewController: UIViewController {
 
     private(set) var networkManager: NetworkManager = NetworkManagerImpl(fetcher: NetworkFetcherImpl(service: NetworkServiceImpl()))
     
+    static let uIStoryboardIdentifie = "Main"
+    static let genreViewControllerIdentifie = "showListOfGenres"
+    static let movieViewControllerIdentifie = "showListOfMovies"
+    static let movieDescriptionViewControllerIdentifie = "showDescriptionOfMovie"
+    static let aletViewControllerIdentifie = "alertViewController"
+    static let genreReuseIdentifier = "customCell"
+    static let moiveReuseIdentifier = "movieCell"
+    static let defaultIcon = "default"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,9 +30,10 @@ class BaseViewController: UIViewController {
     
     func pushAlertViewController() {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard(name: BaseViewController.uIStoryboardIdentifie, bundle: nil)
         
-        guard let movieView = storyBoard.instantiateViewController(identifier: "alertViewController") as? CustomAlertViewController else {
+        guard let movieView = storyBoard.instantiateViewController(identifier: BaseViewController.aletViewControllerIdentifie) as? CustomAlertViewController else {
+            
             return
         }
         
@@ -34,11 +44,13 @@ class BaseViewController: UIViewController {
 private extension BaseViewController {
     
     func setBackIndicator() {
+        
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arrow")
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arrow")
     }
     
     func setDefaultBackBarButton() {
+        
         let backItem = UIBarButtonItem()
         backItem.title = ""
         backItem.tintColor = .white
@@ -46,6 +58,7 @@ private extension BaseViewController {
     }
     
     func setTitleView() {
+        
         let lbNavTitle = UILabel (frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.6, height: 40))
         lbNavTitle.textColor = UIColor.white
         lbNavTitle.font = UIFont.boldSystemFont(ofSize: 20)

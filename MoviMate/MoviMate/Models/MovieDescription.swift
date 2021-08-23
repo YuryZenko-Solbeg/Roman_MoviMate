@@ -8,6 +8,7 @@
 import UIKit
 
 struct MovieDescription: Codable {
+    
     var id: Int
     var releaseDate: Date
     var budget: Int
@@ -19,6 +20,7 @@ struct MovieDescription: Codable {
     var rating: Float
     
     init(from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         let buff = try container.decode(String.self, forKey: .releaseDate)
@@ -43,6 +45,7 @@ struct MovieDescription: Codable {
 }
 
 struct Genre: Codable {
+    
     var id: Int
     var name: String
 }

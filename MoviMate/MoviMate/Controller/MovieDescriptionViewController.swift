@@ -34,19 +34,6 @@ class MovieDescriptionViewController: BaseViewController {
         
         firstView.layer.cornerRadius = 8
         secondView.layer.cornerRadius = 8
-        
-        
-//        icon.layer.masksToBounds = false
-//        
-//        icon.layer.shadowColor = UIColor.white.cgColor
-//        icon.layer.shadowOpacity = 1
-//        icon.layer.shadowOffset = CGSize(width: 5, height: 5)
-//        icon.layer.shadowRadius = 6
-//        icon.layer.shadowPath = UIBezierPath(rect: icon.bounds).cgPath
-//        icon.layer.shouldRasterize = true
-//        icon.layer.rasterizationScale = UIScreen.main.scale
-//        
-//        
 
         budget.layer.masksToBounds = true
         budget.layer.cornerRadius = 4
